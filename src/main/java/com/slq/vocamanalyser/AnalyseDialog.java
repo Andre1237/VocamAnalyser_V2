@@ -148,10 +148,10 @@ public void update_DialogComponents(Document pdfDoc,Node DialogNode) throws IOEx
                                                 VocamAnalyser.comp_ButtonComponent.analyse();
                                                 VocamAnalyser.comp_ButtonComponent.create(pdfDoc);
                                                 break;
-                        case "Button":          VocamAnalyser.comp_Button.readComponentData(childNode, NOSCREENOUTPUT);
-                                                VocamAnalyser.comp_Button.analyse();
-                                                VocamAnalyser.comp_Button.create(pdfDoc);
-                                                break;
+//                        case "Button":          VocamAnalyser.comp_Button.readComponentData(childNode, NOSCREENOUTPUT);
+//                                                VocamAnalyser.comp_Button.analyse();
+//                                                VocamAnalyser.comp_Button.create(pdfDoc);
+//                                                break;
                         case "Label":           VocamAnalyser.comp_Label.readComponentData(childNode, NOSCREENOUTPUT);
                                                 VocamAnalyser.comp_Label.analyse();
                                                 VocamAnalyser.comp_Label.create(pdfDoc);
