@@ -9,7 +9,6 @@ import com.itextpdf.kernel.color.Color;
 import com.itextpdf.layout.border.Border;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
 
 /**
  *
@@ -27,7 +26,7 @@ public class PfdCell {
     Cell        celInhoud;
   
     //============================================================== constructor
-public PfdCell(Table tabel){
+public PfdCell(){
 //   nothing to construct.
 }   
 

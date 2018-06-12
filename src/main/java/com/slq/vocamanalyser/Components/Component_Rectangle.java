@@ -69,7 +69,7 @@ public class Component_Rectangle {
         
 public Component_Rectangle() {
     Table  tabel = new Table(6).setBorder(Border.NO_BORDER);  
-    cell = new PfdCell(tabel);
+    cell = new PfdCell();
     check = new Check();
 }
 

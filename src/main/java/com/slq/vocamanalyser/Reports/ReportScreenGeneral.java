@@ -94,8 +94,8 @@ public ReportScreenGeneral(Document pdfDoc) {
         Table tabel = new Table(12);
         tabel.setWidthPercent(100);
         // Font definitions
-        pKop = new Paragraph().setFontSize(10).setUnderline().setBold();
-        p = new Paragraph().setFontSize(10);
+        pKop = new Paragraph().setFontSize(9).setUnderline().setBold();
+        p = new Paragraph().setFontSize(8);
         // Tabstops definitions
         p.addTabStops(new TabStop(60, TabAlignment.LEFT));
         p.addTabStops(new TabStop(65, TabAlignment.LEFT));

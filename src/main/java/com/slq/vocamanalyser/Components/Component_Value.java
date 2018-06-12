@@ -87,7 +87,7 @@ public class Component_Value {
     
 public Component_Value() {
     Table  tabel = new Table(6).setBorder(Border.NO_BORDER);  
-    cell = new PfdCell(tabel);
+    cell = new PfdCell();
     check = new Check();
 }
 

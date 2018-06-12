@@ -64,7 +64,7 @@ public ReportScreenLinks(Document pdfDoc) {
         Table tabel = new Table(UnitValue.createPercentArray(columnWidths));
         tabel.setWidth(UnitValue.createPercentValue(100)).setFixedLayout();        
         tabel.setWidthPercent(100);
-        PfdCell cell = new PfdCell(tabel);
+        PfdCell cell = new PfdCell();
 
         tabel.addCell(cell.writeB(4, "LINKS ON THIS PAGE"));
 

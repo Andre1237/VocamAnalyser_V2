@@ -68,7 +68,7 @@ public class Component_Line {
         
 public Component_Line() {
    Table  tabel = new Table(6).setBorder(Border.NO_BORDER);  
-    cell = new PfdCell(tabel);
+    cell = new PfdCell();
     check = new Check();
 }
 

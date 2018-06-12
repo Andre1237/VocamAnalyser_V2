@@ -56,7 +56,7 @@ public ReportScreenHeader(Document pdfDoc) {
         tabel.addCell(kopTekst3);
 
         // Add main title in the center 
-        p = new Paragraph(" Screen :  ").setFontSize(14)
+        p = new Paragraph(" Screen :  ").setFontSize(12)
             .add(screenHeaderTitle).setFontSize(14);
         Cell kopTekst1 = new Cell(1,8).add(p);
         tabel.addCell(kopTekst1);         

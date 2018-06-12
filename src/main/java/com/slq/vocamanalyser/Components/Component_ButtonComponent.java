@@ -70,7 +70,7 @@ public class Component_ButtonComponent {
         
 public Component_ButtonComponent() {
     Table  tabel = new Table(6).setBorder(Border.NO_BORDER);  
-    cell = new PfdCell(tabel);
+    cell = new PfdCell();
     check = new Check();
 }
     

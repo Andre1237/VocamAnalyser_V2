@@ -70,7 +70,7 @@ public ReportTags(Document pdfDoc) {
         tabel.setWidthPercent(100);
         
         pKop = new Paragraph().setFontSize(10).setUnderline().setBold();
-        p = new Paragraph().setFontSize(10);
+        p = new Paragraph().setFontSize(8);
         // Definitie tabstops
         p.addTabStops(new TabStop(25, TabAlignment.RIGHT));
         p.addTabStops(new TabStop(34, TabAlignment.LEFT));

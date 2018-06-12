@@ -38,21 +38,12 @@ public class VocamAnalyser{
      */
     //public static String pad = "C:/Local_data/Vocam_Bravenes/bravenes_jb/project/dialogs/";
     public static String pad = "C:/Local_data/Vocam_Bravenes/bravenes_jb/project/screens/";
-    public static String filenaam = "";
+    public static String filenaam = "aaa_testscreenslq_aaa_testscreen2_slq.xml";
     public static String pdfDestDir = "C:\\Local_data\\VocamAnalyzer\\";
     public static final String LOGO = "src/main/resources/images/LogoMarineIngenuity.gif";
 
     public static AnalyseDialog             analyseDialog = new AnalyseDialog();
     public static AnalyseScreen             analyseScreen = new AnalyseScreen();
-    public static Component_CheckBox        comp_CheckBox = new Component_CheckBox();
-    public static Component_Indicator       comp_Indicator = new Component_Indicator();
-    public static Component_Rectangle       comp_Rectangle = new Component_Rectangle();
-    public static Component_Value           comp_Value = new Component_Value();
-    public static Component_ButtonComponent comp_ButtonComponent = new Component_ButtonComponent();
-//    public static Component_Button          comp_Button = new Component_Button();
-    public static Component_Line            comp_Line = new Component_Line();
-    public static Component_Label           comp_Label = new Component_Label();
-    public static Component_InputField      comp_InputField = new Component_InputField();
     public static ReportMessages            reportMessages;
     public static ReportTags                reportTags; 
     public static ReportLinks               reportLink; 
@@ -101,16 +92,8 @@ public void go(){
                 //================================================================================================
                 // Loop for 1 page                             
                 //================================================================================================
-                comp_CheckBox = new Component_CheckBox();
-                comp_Indicator = new Component_Indicator();
-                comp_Rectangle = new Component_Rectangle();
-                comp_Value = new Component_Value();
-                comp_ButtonComponent = new Component_ButtonComponent();
-                comp_Line = new Component_Line();
-                comp_Label = new Component_Label();
-                comp_InputField = new Component_InputField();
-
                 //Kijk of de PDF outputfile gemaakt kan worden.
+
                 try {
                     Paragraph p;
                     Paragraph pKop;

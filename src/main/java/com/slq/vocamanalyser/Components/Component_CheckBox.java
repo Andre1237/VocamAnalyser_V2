@@ -72,7 +72,7 @@ public class Component_CheckBox {
 
 public Component_CheckBox() {
     Table  tabel = new Table(6).setBorder(Border.NO_BORDER);  
-    cell = new PfdCell(tabel);
+    cell = new PfdCell();
     check = new Check();
 }
 

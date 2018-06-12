@@ -71,7 +71,7 @@ public class Component_Label {
         
 public Component_Label() {
     Table  tabel = new Table(6).setBorder(Border.NO_BORDER);  
-    cell = new PfdCell(tabel);
+    cell = new PfdCell();
     check = new Check();
 }
 

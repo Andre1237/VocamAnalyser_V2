@@ -77,7 +77,7 @@ public class Component_Indicator {
 
 public Component_Indicator() {
     Table  tabel = new Table(6).setBorder(Border.NO_BORDER);  
-    cell = new PfdCell(tabel);
+    cell = new PfdCell();
     check = new Check();
 }
 
