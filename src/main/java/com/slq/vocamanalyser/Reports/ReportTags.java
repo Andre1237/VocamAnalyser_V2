@@ -89,7 +89,7 @@ public ReportTags(Document pdfDoc) {
         p.add(new Tab());
         p.add("Tag");
         p.add(new Tab());
-        p.add("Tag location");
+        p.add("Component ID");
         p.add("\n");
 
         int indexRegelTeller= 1;

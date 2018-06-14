@@ -11,26 +11,26 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.UnitValue;
 import com.slq.vocamanalyser.Component;
-import com.slq.vocamanalyser.Check;
 import com.slq.vocamanalyser.Reports.TableRow;
 import com.slq.vocamanalyser.RichtingString;
-import com.slq.vocamanalyser.VocamAnalyser;
 import java.io.IOException;
 
 /**
  *
  * @author SLQ
  */
-public class Component_Button {
+public class Component_ButtonToggle {
+
     //================================================================ constants
    
     //=================================================================== fields
-// Standard variables
+    // Standard variables
     String      joystickOverrules;
     TableRow    tableRow;
+
     //============================================================== constructor 
 
-public Component_Button() {
+public Component_ButtonToggle() {
     Table  tabel = new Table(6).setBorder(Border.NO_BORDER);  
  
 }
@@ -44,10 +44,6 @@ public Component_Button() {
  */
 public Component create(Document pdfDoc, Component c) throws IOException{
 
-    // Check parameters of individual component and
-    // report on used tags.
-    analyse(c);
-
     tableRow = new TableRow(pdfDoc);    // for adding a new table row
     Paragraph p;                        // for adding a newline
 
@@ -60,27 +56,25 @@ public Component create(Document pdfDoc, Component c) throws IOException{
     String size  =   c.width + " x " + c.height + "   (Width x Height)";
     String position = c.xPos + " , " + c.yPos   + "   (X,Y)";
     String symbolTagDxDy = c.symbolTag        + "   Dx: " + c.symbolTagDx +"   Dy: "+c.symbolTagDy;
- 
-    tableRow.add(tabel,5, "BUTTON",                     c.componentID  );
+    RichtingString richtingsRegel = new RichtingString(c.overruleNorth,c.overruleNorthEast,c.overruleEast,c.overruleSouthEast,
+                                                       c.overruleSouth,c.overruleSouthWest,c.overruleWest,c.overruleNorthWest);
+
+
+    tableRow.add(tabel,0, "BUTTONTOGGLE"                                             );
     tableRow.add(tabel,0, "Description", c.description                               );
 
     tableRow.add(tabel,4, "Geometry",                   "Software Tags"              );
-    tableRow.add(tabel,0, "Size"    ,    size,          "TagCW",        c.tagCW      );
-    tableRow.add(tabel,0, "Position",    position,      "TagDisabled",  c.tagDisabled);
-    tableRow.add(tabel,1, "General",                    "TagValue",     c.tagValue   );
+    tableRow.add(tabel,0, "Size"    ,    size,          "TagSW",        c.tagSW      );
+    tableRow.add(tabel,0, "Position",    position,      "TagCW",        c.tagCW      );
     tableRow.add(tabel,0, "Enable",      c.enable,      "Show",         c.show       );
-    tableRow.add(tabel,0, "Visible",     c.visible,     "TagStates",    c.tagStates  );
-    tableRow.add(tabel,3, "UseImage",    c.useImage,    "Layout"                     );
-    tableRow.add(tabel,0, "NormalImage", c.normalImage, "FontSize",     c.fontSize   );
-    tableRow.add(tabel,0, "Label",       c.label,       " ",            ""           );
-
+    tableRow.add(tabel,0, "Visible",     c.visible,     "ColorActive",  c.colorActive);
+    
     tableRow.add(tabel,0, "Actions"                                                  );
     tableRow.add(tabel,0, "OnReleaseAction",c.onReleaseAction                        );
     tableRow.add(tabel,0, "ReferenceTable", c.referenceTable                         );
     tableRow.add(tabel,0, "Help popup",     c.helpPopup                              );
-    tableRow.add(tabel,0, "Joystick   ",    c.directionOverule                       );
+    tableRow.add(tabel,0, "Joystick   ",    richtingsRegel.regel                     );
     tableRow.add(tabel,0, "SymbolTag",      symbolTagDxDy                            );
-    tableRow.add(tabel,0, "States",         c.states                                 );
 
     // Add the cells to the table
     pdfDoc.add(tabel);
@@ -92,22 +86,31 @@ public Component create(Document pdfDoc, Component c) throws IOException{
     return c;
 }
 
-    public void analyse(Component c){
-
-    Check check = new Check();
-        
-    //=================================== Write tags to the tag-tracker database
-    if (check.isTag(c.tagValue))   { VocamAnalyser.reportTags.addTag("Button","TagValue", c.tagValue, c.componentID); }
-    if (check.isTag(c.tagCW))      { VocamAnalyser.reportTags.addTag("Button","tagCW", c.tagCW, c.componentID); }
-    if (check.isTag(c.tagDisabled)){ VocamAnalyser.reportTags.addTag("Button","tagDisabled", c.tagDisabled,  c.componentID); }
-    if (check.isTag(c.show))       { VocamAnalyser.reportTags.addTag("Button","Show", c.show,  c.componentID); }
-    if (check.isTag(c.tagStates))  { VocamAnalyser.reportTags.addTag("Button","tagStates", c.tagStates,  c.componentID); }
-    
-    //=================================== Write messages to the message database
- 
-    if (c.description.isEmpty()){ VocamAnalyser.reportMessages.addMsg
-                            ("Warning","Component has no description text added", c.componentID);}
-        
-            
-    }
+    public void analyse(){
+//        
+//    //=================================== Write tags to the tag-tracker database
+//    
+//    if (check.isTag(tagValue)) { VocamAnalyser.reportTags.addTag
+//                            ("Button","TagValue", tagValue, "(Pos "+xPos+","+yPos+")"); }
+//    
+//    if (check.isTag(tagCW)) { VocamAnalyser.reportTags.addTag
+//                            ("Button","tagCW", tagCW, "(Pos "+xPos+","+yPos+")"); }
+//    
+//    if (check.isTag(tagDisabled)) { VocamAnalyser.reportTags.addTag
+//                            ("Button","tagDisabled", tagDisabled, "(Pos "+xPos+","+yPos+")"); }
+//
+//    if (check.isTag(show))  { VocamAnalyser.reportTags.addTag
+//                            ("Button","Show", show, "(Pos "+xPos+","+yPos+")"); }
+//    
+//    if (check.isTag(tagStates))  { VocamAnalyser.reportTags.addTag
+//                            ("Button","tagStates", tagStates, "(Pos "+xPos+","+yPos+")"); }
+//    
+//    //=================================== Write messages to the message database
+// 
+//    if (description.isEmpty()){ VocamAnalyser.reportMessages.addMsg
+//                            ("Warning","Component has no description text added","(Pos "+xPos+","+yPos+")");}
+//        
+//            
+//    }
 }    
+}

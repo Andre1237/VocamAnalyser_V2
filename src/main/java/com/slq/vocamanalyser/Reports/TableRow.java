@@ -11,6 +11,8 @@ import com.itextpdf.layout.border.Border;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.HorizontalAlignment;
+import com.itextpdf.layout.property.TextAlignment;
 import com.slq.vocamanalyser.PfdCell;
 
 /**
@@ -106,6 +108,10 @@ public void add( Table  tabel, int layoutCode, String column1, String column2,St
  *                |column1  |column2                                        |
  *                +---------+-----------------------------------------------+
  * 
+ * Layout 6:      +-------------------------------------+-------------------+
+ *                |column1                              |           column2 |
+ *                +-------------------------------------+-------------------+
+ * 
  * @param tabel         tabel in which the row has to be added
  * @param layoutCode
  * @param column1       See above
@@ -125,6 +131,9 @@ public void add( Table  tabel, int layoutCode, String column1, String column2){
                     break;   
         case 4:     tabel.addCell(writeGray(3, column1));
                     tabel.addCell(writeGray(3, column2));
+                    break;   
+        case 5:     tabel.addCell(writeNR5(4, column1));
+                    tabel.addCell(writeNR6(2, "Compont ID:     " + column2));
                     break;   
         default:    tabel.addCell(write(1, column1));
                     tabel.addCell(write(5, column2));
@@ -188,6 +197,33 @@ public void add( Table  tabel, int layoutCode, String column1){
         p.add(celContent);
         celInhoud = new Cell(1,numberOfCells).add(p);
         celInhoud.setBackgroundColor(Color.LIGHT_GRAY);  
+        return celInhoud;
+    }
+
+    private Cell writeNR5(int numberOfCells, String celContent){
+    
+        p = new Paragraph() .setFontSize(FONTSIZE)
+                            .setMarginTop(TOPMARGINE)
+                            .setMarginBottom(BOTTOMMARGINE);
+       
+        p.add(celContent);
+        celInhoud = new Cell(1,numberOfCells).add(p);
+        celInhoud.setBackgroundColor(Color.LIGHT_GRAY); 
+        celInhoud.setBorderRight(Border.NO_BORDER);
+        return celInhoud;
+    }
+
+    private Cell writeNR6(int numberOfCells, String celContent){
+    
+        p = new Paragraph() .setFontSize(FONTSIZE)
+                            .setMarginTop(TOPMARGINE)
+                            .setMarginBottom(BOTTOMMARGINE);
+        p.add(celContent);
+        celInhoud = new Cell(1,numberOfCells).add(p);
+        celInhoud.setBackgroundColor(Color.LIGHT_GRAY); 
+        celInhoud.setTextAlignment(TextAlignment.RIGHT);
+        celInhoud.setBorderLeft(Border.NO_BORDER);
+        
         return celInhoud;
     }
     

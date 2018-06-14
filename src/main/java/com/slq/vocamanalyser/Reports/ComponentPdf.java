@@ -7,7 +7,7 @@ package com.slq.vocamanalyser.Reports;
 
 import com.itextpdf.layout.Document;
 import com.slq.vocamanalyser.Component;
-import com.slq.vocamanalyser.Components.Component_Button;
+import com.slq.vocamanalyser.Components.*;
 import java.io.IOException;
 
 /**
@@ -32,27 +32,17 @@ public void create(Component component) throws IOException {
     
     
                     switch(component.componentType){
-                        case "Indicator":       System.out.println("To de defined Indicator");
-                                                break;   
-                        case "Rectangle":       System.out.println("To de defined Rectangle");
-                                                break;    
-                        case "Value":           System.out.println("To de defined Value"); 
-                                                break;   
-                        case "ButtonComponent": System.out.println("To de defined ButtonComponent");
-
-
-                        case "Button":          Component comp_Button = new Component_Button().create(pdfDoc, component);
-                                                //comp_Button.create(pdfDoc, component);
-
-                                                break;
-                        case "Label":           System.out.println("To de defined Label");
-                                                break;
-                        case "Line":            System.out.println("To de defined Line");
-                                                break;
-                        case "InputField":      System.out.println("To de defined InputField"); 
-                                                break;                                                
-                        case "CheckBox":        System.out.println("To de defined CheckBox"); 
-                                                break;                                                
+                        case "Indicator"      : Component comp_Indicator            = new Component_Indicator().create(pdfDoc, component); break;
+                        case "Value"          : Component comp_Value                = new Component_Value().create(pdfDoc, component); break;  
+                        case "Button"         : Component comp_Button               = new Component_Button().create(pdfDoc, component); break;
+                        case "ButtonComponent": Component component_ButtonComponent = new Component_ButtonComponent().create(pdfDoc, component);break;
+                        case "ButtonToggle"   : Component comp_ButtonToggle         = new Component_ButtonToggle().create(pdfDoc, component);break;
+                        case "Rectangle"      : Component Component_Rectangle       = new Component_Button().create(pdfDoc, component); break;
+                        case "Label"          : Component comp_Label                = new Component_Label().create(pdfDoc, component); break;
+                        case "InputField"     : Component comp_InputField           = new Component_InputField().create(pdfDoc, component); break;                                               
+                        case "CheckBox"       : Component component_CheckBox        = new Component_CheckBox().create(pdfDoc, component);break;
+                        case "Line"           : Component comp_Line                 = new Component_Line().create(pdfDoc, component);break;
+                        
                         default:                System.out.println("#####Component type"+component.componentType+" not yet defined");                    
 
                     }
