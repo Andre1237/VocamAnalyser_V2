@@ -8,6 +8,7 @@ package com.slq.vocamanalyser;
 
 import com.slq.vocamanalyser.Reports.RapportageDialog;
 import com.itextpdf.layout.Document;
+import com.slq.vocamanalyser.Reports.ComponentPdf;
 import java.io.IOException;
 import java.util.ArrayList;
 import org.w3c.dom.Node;
@@ -113,9 +114,7 @@ public void update_DialogComponents(Document pdfDoc,Node DialogNode) throws IOEx
         }
 
         rapportage.createFrontPage(pdfDoc);
-     //   rapportage.reportMessages.create(pdfDoc);
-        
-
+     //   rapportage.reportScreenMessages.create(pdfDoc);
         //= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         // Tweede loop voor individuele componenten
         //= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -123,59 +122,45 @@ public void update_DialogComponents(Document pdfDoc,Node DialogNode) throws IOEx
 
             childNode = verzamelingElementen.item(j);
 
-            if(childNode.getNodeType()==childNode.ELEMENT_NODE){
-            
-                if(childNode.getNodeName().equals("Component")){
-
-                    AttributeFinder attributeFinder = new AttributeFinder(childNode); 
-
-                    attribuut = attributeFinder.result("Title");
-
-                    switch(attribuut){
-                        case "Indicator":       VocamAnalyser.comp_Indicator.readComponentData(childNode, NOSCREENOUTPUT);
-                                                VocamAnalyser.comp_Indicator.analyse();
-                                                VocamAnalyser.comp_Indicator.create(pdfDoc); 
-                                                break;   
-                        case "Rectangle":       VocamAnalyser.comp_Rectangle.readComponentData(childNode, NOSCREENOUTPUT);
-                                                VocamAnalyser.comp_Rectangle.analyse();
-                                                VocamAnalyser.comp_Rectangle.create(pdfDoc); 
-                                                break;    
-                        case "Value":           VocamAnalyser.comp_Value.readComponentData(childNode, NOSCREENOUTPUT); 
-                                                VocamAnalyser.comp_Value.analyse();
-                                                VocamAnalyser.comp_Value.create(pdfDoc); 
-                                                break;   
-                        case "ButtonComponent": VocamAnalyser.comp_ButtonComponent.readComponentData(childNode, NOSCREENOUTPUT);
-                                                VocamAnalyser.comp_ButtonComponent.analyse();
-                                                VocamAnalyser.comp_ButtonComponent.create(pdfDoc);
-                                                break;
-//                        case "Button":          VocamAnalyser.comp_Button.readComponentData(childNode, NOSCREENOUTPUT);
-//                                                VocamAnalyser.comp_Button.analyse();
-//                                                VocamAnalyser.comp_Button.create(pdfDoc);
-//                                                break;
-                        case "Label":           VocamAnalyser.comp_Label.readComponentData(childNode, NOSCREENOUTPUT);
-                                                VocamAnalyser.comp_Label.analyse();
-                                                VocamAnalyser.comp_Label.create(pdfDoc);
-                                                break;
-                        case "Line":            VocamAnalyser.comp_Line.readComponentData(childNode, NOSCREENOUTPUT); 
-                                                VocamAnalyser.comp_Line.analyse();
-                                                VocamAnalyser.comp_Line.create(pdfDoc);
-                                                break;
-                        case "InputField":      VocamAnalyser.comp_InputField.readComponentData(childNode, NOSCREENOUTPUT); 
-                                                VocamAnalyser.comp_InputField.analyse();
-                                                VocamAnalyser.comp_InputField.create(pdfDoc);
-                                                break;                                                
-                        case "CheckBox":        VocamAnalyser.comp_CheckBox.readComponentData(childNode, NOSCREENOUTPUT); 
-                                                VocamAnalyser.comp_CheckBox.analyse();
-                                                VocamAnalyser.comp_CheckBox.create(pdfDoc);
-                                                break;                                                
-                        default:                System.out.println("#####Component type "+attribuut+" not yet defined");                    
-
-                    }
-                }
-            }
-        }
-        rapportage.createMessages(pdfDoc);  
+//            if(childNode.getNodeType()==childNode.ELEMENT_NODE){
+//            
+//                if(childNode.getNodeName().equals("Component")){
+//
+//                    AttributeFinder attributeFinder = new AttributeFinder(childNode); 
+//
+//                    attribuut = attributeFinder.result("Title");
+//
+//                    //create the Pdf component
+//                    componentPdf        = new ComponentPdf(pdfDoc);
+//                    
+//                    //read the component and place it into the component array
+//                    component.get(childNode);
+//
+//                    System.out.println("component.componentID =  "+component.componentID);
+//                    
+//                    components.add(component);
+//                    
+//                    //create the Pdf tabels from every component
+//                    componentPdf.create(component);
+//                }
+//            }
+//        }
+//        
+//        
+//        for(int i=0; i < components.size();i++){
+//            //componentPdf.create(components.get(i));
+//            System.out.println("Component"+i+" "+components.get(i).componentID);
+//            
+//        }    
+//        rapportage.createMessages(pdfDoc);  
+//            Component c;
+//            c = components.get(1); System.out.println("nummer 1 = "+c.componentID);
+//            c = components.get(2); System.out.println("nummer 1 = "+c.componentID);
+//            c = components.get(3); System.out.println("nummer 1 = "+c.componentID);
+//            c = components.get(4); System.out.println("nummer 1 = "+c.componentID);
         
+        }
     }
 }
 }
+

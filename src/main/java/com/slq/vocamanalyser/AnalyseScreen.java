@@ -11,6 +11,7 @@ import com.slq.vocamanalyser.Components.*;
 import com.slq.vocamanalyser.Reports.ComponentPdf;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -24,6 +25,23 @@ public class AnalyseScreen {
     private static final boolean NOSCREENOUTPUT = false;
 
     //=================================================================== fields
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - -non public fields
+    Node                    childNode;
+    NodeList                verzamelingElementen;
+    String                  attribuut;
+    String                  screenDescription;
+    Document                pdfDoc;
+    Component               component;
+    ComponentPdf            componentPdf;            
+    
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -public fields
+//    public List<Component>  components = new ArrayList<>();
+    
+    //public List<Component>  components;
+    public List<Component>  components;
+    public RapportageScreen rapportage;  
+
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - -Components fields
     public static Component_Button          comp_Button = new Component_Button();
     public static Component_CheckBox        comp_CheckBox = new Component_CheckBox();
     public static Component_Indicator       comp_Indicator = new Component_Indicator();
@@ -33,41 +51,29 @@ public class AnalyseScreen {
     public static Component_Line            comp_Line = new Component_Line();
     public static Component_Label           comp_Label = new Component_Label();
     public static Component_InputField      comp_InputField = new Component_InputField();
-   
+   // ArrayList<Object> arrayList = new ArrayList<Object>();
      
-    Node                childNode;
-    NodeList            verzamelingElementen;
-    String              attribuut;
-    String              screenDescription;
-    Document            pdfDoc;
-
-    public RapportageScreen rapportage;  
-    ArrayList<String>       componentenLijst;
-    ArrayList<Integer>      compTeller;   
-    Component               component;
-    ComponentPdf            componentPdf;            
-
    //============================================================== constructors
     
 public AnalyseScreen() {
     pdfDoc              = null;
     screenDescription   = "";
-    componentenLijst    = new ArrayList<>();
-    compTeller          = new ArrayList<>(); 
     component           = new Component();
+    components          = new ArrayList<Component>();
 }
 public AnalyseScreen(Document pdfDoc) {
     pdfDoc              = null;
     screenDescription   = "";
-    componentenLijst    = new ArrayList<>();
-    compTeller          = new ArrayList<>();   
     rapportage          = new RapportageScreen(pdfDoc);  
     component           = new Component();
+    components          = new ArrayList<Component>();
 
 }
 
 public void update_ScreenComponents(Document pdfDoc,Node ScreenNode) throws IOException, InterruptedException{
  
+    components = new ArrayList<Component>();
+    
     this.pdfDoc = pdfDoc;   
     if (ScreenNode.hasChildNodes()){
 
@@ -144,75 +150,27 @@ public void update_ScreenComponents(Document pdfDoc,Node ScreenNode) throws IOEx
 
                     attribuut = attributeFinder.result("Title");
 
-System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++ ");
+                    //create the Pdf component
+                    componentPdf        = new ComponentPdf(pdfDoc);
+                    component           = new Component();                
 
-        componentPdf        = new ComponentPdf(pdfDoc);
+                    //read the component and place it into the component array
+                    component.get(childNode);
 
-
-
-        component.get(childNode);
-        componentPdf.create(component);
-        
-        
-        
-        
-//        component[1] = omponent.Get(attribuut);//   comp_Button.readComponentData(childNode, NOSCREENOUTPUT);
-        
-        
-        
-        
-        
-System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++ ");
-//                    switch(attribuut){
-//                        case "Indicator":       comp_Indicator.readComponentData(childNode, NOSCREENOUTPUT);
-//                                                comp_Indicator.analyse();
-//                                                comp_Indicator.create(pdfDoc); 
-//                                                break;   
-//                        case "Rectangle":       comp_Rectangle.readComponentData(childNode, NOSCREENOUTPUT);
-//                                                comp_Rectangle.analyse();
-//                                                comp_Rectangle.create(pdfDoc); 
-//                                                break;    
-//                        case "Value":           comp_Value.readComponentData(childNode, NOSCREENOUTPUT); 
-//                                                comp_Value.analyse();
-//                                                comp_Value.create(pdfDoc); 
-//                                                break;   
-//                        case "ButtonComponent": comp_ButtonComponent.readComponentData(childNode, NOSCREENOUTPUT);
-//                                                comp_ButtonComponent.analyse();
-//                                                comp_ButtonComponent.create(pdfDoc);
-//                                                break;
-////                        case "Button":          comp_Button.readComponentData(childNode, NOSCREENOUTPUT);
-////                                                comp_Button.analyse();
-////                                                comp_Button.create(pdfDoc);
-////                                                break;
-//                        case "Button":          comp_Button.readComponentData(childNode, NOSCREENOUTPUT);
-//                                                comp_Button.analyse();
-//                                                comp_Button.create(pdfDoc);
-//                                                break;
-////                        case "Button":       component[1] = omponent.Get(attribuut);//   comp_Button.readComponentData(childNode, NOSCREENOUTPUT);
-//                        case "Label":           comp_Label.readComponentData(childNode, NOSCREENOUTPUT);
-//                                                comp_Label.analyse();
-//                                                comp_Label.create(pdfDoc);
-//                                                break;
-//                        case "Line":            comp_Line.readComponentData(childNode, NOSCREENOUTPUT); 
-//                                                comp_Line.analyse();
-//                                                comp_Line.create(pdfDoc);
-//                                                break;
-//                        case "InputField":      comp_InputField.readComponentData(childNode, NOSCREENOUTPUT); 
-//                                                comp_InputField.analyse();
-//                                                comp_InputField.create(pdfDoc);
-//                                                break;                                                
-//                        case "CheckBox":        comp_CheckBox.readComponentData(childNode, NOSCREENOUTPUT); 
-//                                                comp_CheckBox.analyse();
-//                                                comp_CheckBox.create(pdfDoc);
-//                                                break;                                                
-//                        default:                System.out.println("#####Component type "+attribuut+" not yet defined");                    
-//
-//                    }
+                    // Add the component to the arraylist
+                    components.add(component);
+                    
+                    //create the Pdf tabels from every component
+                    componentPdf.create(component);
                 }
             }
         }
-        rapportage.createMessages(pdfDoc);  
         
+        for(int i=0; i < components.size();i++){
+            //componentPdf.create(components.get(i));
+            System.out.println("Component"+i+" "+components.get(i).componentID);
+            
+        }    
     }
 }
 }
