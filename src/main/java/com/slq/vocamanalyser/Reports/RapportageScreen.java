@@ -34,10 +34,10 @@ public class RapportageScreen {
 
 public RapportageScreen(){
 }
-public RapportageScreen(Document pdfDoc){
-
-    reportScreenHeader   = new ReportScreenHeader(pdfDoc);
-    reportScreenGeneral  = new ReportScreenGeneral(pdfDoc);
+public RapportageScreen(Document pdfDoc, Screen screen){
+    
+    reportScreenHeader   = new ReportScreenHeader(pdfDoc,screen);
+    reportScreenGeneral  = new ReportScreenGeneral(pdfDoc, screen);
     reportScreenSummary  = new ReportScreenSummary(pdfDoc);
     reportScreenMessages = new ReportScreenMessages(pdfDoc);
     reportScreenLinks    = new ReportScreenLinks(pdfDoc);
@@ -52,6 +52,19 @@ public RapportageScreen(Document pdfDoc){
 
         Table tabel = new Table(12);
         tabel.setWidthPercent(100);
+
+//        switch (screen.vocamScreenType){
+//            case "Screen" : screenTypeText= "Screen :";
+//                            break;
+//            case "Dialog" : screenTypeText= "Dialog :";
+//                            break;
+//                            
+//        }
+//                            if((vocamScreenType.equals("Screen"))||
+//                       (vocamScreenType.equals("Dialog"))||    
+//                       (vocamScreenType.equals("Popup"))||    
+//                       (vocamScreenType.equals("Frame"))||    
+//                       (vocamScreenType.equals("Template"))  )
 
         reportScreenHeader.create(pdfDoc);
 

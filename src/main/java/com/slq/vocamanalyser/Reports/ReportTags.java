@@ -12,7 +12,6 @@ import com.itextpdf.layout.element.Tab;
 import com.itextpdf.layout.element.TabStop;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TabAlignment;
-import com.itextpdf.layout.property.UnitValue;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
@@ -100,7 +99,8 @@ public ReportTags(Document pdfDoc) {
             }else{
                 p.add(String.valueOf(indexRegelTeller));
                 indexRegelTeller++;
-            }                
+            }       
+            
             p.add(new Tab());
             p.add(component.get(i));
             p.add(new Tab());

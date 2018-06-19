@@ -42,8 +42,8 @@ public class VocamAnalyser{
     public static String pdfDestDir = "C:\\Local_data\\VocamAnalyzer\\";
     public static final String LOGO = "src/main/resources/images/LogoMarineIngenuity.gif";
 
-    public static AnalyseDialog             analyseDialog = new AnalyseDialog();
-    public static AnalyseScreen             analyseScreen = new AnalyseScreen();
+ //   public static AnalyseDialog             analyseDialog = new AnalyseDialog();
+    public static VocamScreen               vocamScreen = new VocamScreen();
     public static ReportMessages            reportMessages;
     public static ReportTags                reportTags; 
     public static ReportLinks               reportLink; 
@@ -143,32 +143,32 @@ public void go(){
 
                     verzamelingElementen = doc.getChildNodes();
 
+                    System.out.println("Vocamscreen = "+doc.getDocumentElement().getNodeName());
+
                     // When a screen is found do ...
-                    if(doc.getDocumentElement().getNodeName().equals("Screen")){
-
-                        //Maak een nieuwe instantie aan en roep deze aan met 
-                        //index 0 omdat er toch maar is node is.
-                        analyseScreen = new AnalyseScreen(pdfDoc);
-                        analyseScreen.update_ScreenComponents(pdfDoc,verzamelingElementen.item(0));
-                    }
-
-                    // When a dialog is found do ...
-                    if(doc.getDocumentElement().getNodeName().equals("Dialog")){
-
-                        //Maak een nieuwe instantie aan en roep deze aan met 
-                        //index 0 omdat er toch maar is node is.
-                        analyseDialog = new AnalyseDialog(pdfDoc);
-                        analyseDialog.update_DialogComponents(pdfDoc,verzamelingElementen.item(0));
-                    }
+                    String vocamScreenType = doc.getDocumentElement().getNodeName();
+                    if((vocamScreenType.equals("Screen"))||
+                       (vocamScreenType.equals("Dialog"))||    
+                       (vocamScreenType.equals("Popup"))||    
+                       (vocamScreenType.equals("Frame"))||    
+                       (vocamScreenType.equals("Template"))  )
+                        
+                        {
+                            //Maak een nieuwe instantie aan en roep deze aan met 
+                            //index 0 omdat er toch maar is node is.
+                            vocamScreen = new VocamScreen(pdfDoc, vocamScreenType);
+                            vocamScreen.analyse(pdfDoc,verzamelingElementen.item(0));
+                        }
 
                     pdfDoc.close();
 
                 } catch (IOException | InterruptedException | ParserConfigurationException | SAXException e) {
-
+                    
                 }
-
-                //================================================================================================                             
+                //================================================================================================  
+                // End of one page loop
                 //================================================================================================
+                
             }
             }
         );

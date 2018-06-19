@@ -25,20 +25,13 @@ public class ReportScreenHeader {
     public static final String LOGO = "src/main/resources/images/LogoMarineIngenuity.gif";
     
     //=================================================================== fields
-    static String screenHeaderTitle;
+    private Screen screen;
     
     //============================================================== constructor
-public ReportScreenHeader(Document pdfDoc) {    
-    screenHeaderTitle = "Not defined";
-}    
-    /** Methode for recieving screen title
-     * 
-     * @param screenHeaderTitle 
-     */
-     public void setScreenHeaderTitle(String screenHeaderTitle){
-        ReportScreenHeader.screenHeaderTitle = screenHeaderTitle;
-    }
-     
+public ReportScreenHeader(Document pdfDoc, Screen screen) {  
+    this.screen = screen;
+    }    
+    
     /** Methode to generate the header with logo in the pdf-report
      * 
      * @param screenDescription 
@@ -46,6 +39,8 @@ public ReportScreenHeader(Document pdfDoc) {
     public void create(Document pdfDoc) throws MalformedURLException{
 
         Paragraph p;
+        String headerText;
+        String screenTypeText;
         Table tabel = new Table(12);
         tabel.setWidthPercent(100);
             
@@ -55,9 +50,18 @@ public ReportScreenHeader(Document pdfDoc) {
         Cell kopTekst3 = new Cell(1,2).add(img);
         tabel.addCell(kopTekst3);
 
+
+        if  (screen.filename.length()>45){
+            headerText = screen.filename.substring(0, 45)+" "+screen.filename.substring(45, screen.filename.length());}
+        else{    
+            headerText = screen.filename;
+        }
+        
         // Add main title in the center 
-        p = new Paragraph(" Screen :  ").setFontSize(12)
-            .add(screenHeaderTitle).setFontSize(14);
+        p = new Paragraph(screen.vocamScreenType+" :  ")
+                .setFontSize(12)
+                .add(headerText);
+        
         Cell kopTekst1 = new Cell(1,8).add(p);
         tabel.addCell(kopTekst1);         
 

@@ -310,13 +310,12 @@ public void get(Node component) throws IOException{
                     helpPopup=attributeFinder.result("HelpPopup");
                 }
                 
-                componentID ="01."+xPos.toString()+"."+yPos+"."+"01";
+                componentID ="01."+xPos+"."+yPos+"."+"01";
 
                 directionOverule = new RichtingString(overruleNorth,overruleNorthEast,overruleEast,overruleSouthEast,overruleSouth,overruleSouthWest,overruleWest,overruleNorthWest).regel;
             }
         } 
  
-//        RichtingString richtingsRegel = new RichtingString(overruleNorth,overruleNorthEast,overruleEast,overruleSouthEast,overruleSouth,overruleSouthWest,overruleWest,overruleNorthWest);
     }    
 }
 

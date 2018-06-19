@@ -13,6 +13,7 @@ import com.itextpdf.layout.element.TabStop;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TabAlignment;
 import com.itextpdf.layout.property.UnitValue;
+import com.slq.vocamanalyser.Tabs;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class ReportScreenTags {
     public static ArrayList<String> tagSoort;
     public static ArrayList<String> tagAdres;
     public static ArrayList<String> tagLocation;
-    
+
     //============================================================== constructor
 public ReportScreenTags(Document pdfDoc) {    
     component = new ArrayList<>();
@@ -77,7 +78,7 @@ public ReportScreenTags(Document pdfDoc) {
         p.addTabStops(new TabStop(160, TabAlignment.LEFT));
         p.addTabStops(new TabStop(512, TabAlignment.RIGHT));
 
-        pKop.add("\nUSED TAGS\n");
+        pKop.add("\nUSED TAGS!!!\n");
 
         p.add(new Tab());
         p.add("#");
@@ -100,6 +101,7 @@ public ReportScreenTags(Document pdfDoc) {
                 p.add(String.valueOf(indexRegelTeller));
                 indexRegelTeller++;
             }                
+          
             p.add(new Tab());
             p.add(component.get(i));
             p.add(new Tab());
